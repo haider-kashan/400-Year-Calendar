@@ -19,3 +19,29 @@ def get_start_day(year, month):
     day = (1 + ((13 * (month + 1)) // 5) + k + (k // 4) + (j // 4) - (2 * j)) % 7
     # Adjusting so 0 = Sunday, 1 = Monday, etc.
     return (day + 5) % 7
+    def generate_month(year, month):
+    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    month_names = ["January", "February", "March", "April", "May", "June", 
+                   "July", "August", "September", "October", "November", "December"]
+    
+    if month == 2 and is_leap_year(year):
+        days_in_month[1] = 29
+        
+    start_day = get_start_day(year, month)
+    
+    calendar_output = f"\n  {month_names[month-1]} {year}\n"
+    calendar_output += "Su Mo Tu We Th Fr Sa\n"
+    
+    # Fill initial spaces
+    calendar_output += "   " * start_day
+    
+    for day in range(1, days_in_month[month-1] + 1):
+        calendar_output += f"{day:2} "
+        start_day += 1
+        if start_day == 7:
+            calendar_output += "\n"
+            start_day = 0
+            
+    return calendar_output + "\n"
+
+# Member 3 commits and pushes.
