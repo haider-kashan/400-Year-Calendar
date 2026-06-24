@@ -43,5 +43,16 @@ def get_start_day(year, month):
             start_day = 0
             
     return calendar_output + "\n"
+def generate_400_years(start_year):
+    with open("400_year_calendar.txt", "w") as file:
+        for year in range(start_year, start_year + 400):
+            file.write(f"=== YEAR {year} ===\n")
+            for month in range(1, 13):
+                file.write(generate_month(year, month))
+            file.write("\n")
+    print(f"Calendar from {start_year} to {start_year + 399} generated successfully.")
 
-# Member 3 commits and pushes.
+if __name__ == "__main__":
+    # Generate 400 years starting from 2000
+    generate_400_years(2000)
+
